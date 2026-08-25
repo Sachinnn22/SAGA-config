@@ -1,3 +1,11 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
+
+  instance:
+    prefer-ip-address: true
+
 management:
   endpoints:
     web:
@@ -6,11 +14,12 @@ management:
 
 logging:
   level:
-    com.example: DEBUG          
+    com.example: DEBUG
+    lk.ijse.eca: DEBUG
     org.springframework.web: INFO
     org.hibernate.SQL: DEBUG
 
 jwt:
   secret: MySuperDuperSecretKeyForJwtAuthenticationWhichIsVeryLongAndSecure123456
-  expiration: 900000 
+  expiration: 900000
   refresh-expiration: 604800000
