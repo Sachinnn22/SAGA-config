@@ -2,10 +2,6 @@ server:
   port: 8002
   forward-headers-strategy: framework
 
-spring:
-  application:
-    name: salon-service
-
   mvc:
     problemdetails:
       enabled: true
