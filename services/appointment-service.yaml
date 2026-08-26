@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 0
 
   data:
     mongodb:
@@ -7,3 +7,8 @@ server:
 
   instance:
     prefer-ip-address: true
+
+eureka:
+  instance:
+    # using Service Name and Random UUID to create a unique Instance ID - for port is dynamic ( it means port = 0 )
+    instance-id: ${spring.application.name}:${random.value}  
