@@ -12,7 +12,7 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/api/v1/auth/**,/api/v1/users/**
+            - Path=/api/v1/users/**
 
         - id: salon-service
           uri: lb://SALON-SERVICE
