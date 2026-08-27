@@ -7,79 +7,53 @@ spring:
 
   cloud:
     gateway:
+      server:
+        webflux:
 
-      # ==============================
-      # Eureka Service Discovery
-      # ==============================
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
 
-      # ==============================
-      # API Gateway Routes
-      # ==============================
-      routes:
+          routes:
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/v1/users/**
 
-        # ------------------------------
-        # User Service
-        # ------------------------------
-        - id: user-service
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/api/v1/users/**
+            - id: salon-service
+              uri: lb://SALON-SERVICE
+              predicates:
+                - Path=/api/v1/salons/**
 
-        # ------------------------------
-        # Salon Service
-        # ------------------------------
-        - id: salon-service
-          uri: lb://SALON-SERVICE
-          predicates:
-            - Path=/api/v1/salons/**
+            - id: appointment-service
+              uri: lb://APPOINTMENT-SERVICE
+              predicates:
+                - Path=/api/v1/appointments/**
 
-        # ------------------------------
-        # Appointment Service
-        # ------------------------------
-        - id: appointment-service
-          uri: lb://APPOINTMENT-SERVICE
-          predicates:
-            - Path=/api/v1/appointments/**
+          default-filters:
+            - PreserveHostHeader
+            - AuthenticationFilter
 
-      # ==============================
-      # Global Filters
-      # ==============================
-      default-filters:
-        - PreserveHostHeader
-        - AuthenticationFilter
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins:
+                  - "http://localhost:5173"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders:
+                  - "*"
+                allowCredentials: true
 
-      # ==============================
-      # CORS Configuration
-      # ==============================
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins:
-              - "http://localhost:5173"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - OPTIONS
-            allowedHeaders:
-              - "*"
-            allowCredentials: true
-
-# ==================================
-# Eureka
-# ==================================
 eureka:
   instance:
     prefer-ip-address: true
 
-# ==================================
-# Actuator
-# ==================================
 management:
   endpoints:
     web:
