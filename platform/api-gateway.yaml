@@ -9,10 +9,10 @@ spring:
     gateway:
       server:
         webflux:
+
           discovery:
             locator:
-              enabled: true
-              lower-case-service-id: true
+              enabled: false
 
           routes:
             - id: user-service
