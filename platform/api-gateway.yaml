@@ -6,32 +6,37 @@ spring:
     name: api-gateway
 
   cloud:
-  - gateway:
+    gateway:
+      httpclient:
+        connect-timeout: 10000
+        response-timeout: 30s
+        pool:
+          type: ELASTIC
       server:
         webflux:
           discovery:
             locator:
               enabled: false
 
-          routes:
-            - id: user-service
-              uri: lb://USER-SERVICE
-              predicates:
-                - Path=/api/v1/users/**
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/users/**
 
-            - id: salon-service
-              uri: lb://SALON-SERVICE
-              predicates:
-                - Path=/api/v1/salons/**
+        - id: salon-service
+          uri: lb://SALON-SERVICE
+          predicates:
+            - Path=/api/v1/salons/**
 
-            - id: appointment-service
-              uri: lb://APPOINTMENT-SERVICE
-              predicates:
-                - Path=/api/v1/appointments/**
+        - id: appointment-service
+          uri: lb://APPOINTMENT-SERVICE
+          predicates:
+            - Path=/api/v1/appointments/**
 
-          default-filters:
-            - PreserveHostHeader
-            - AuthenticationFilter
+      default-filters:
+        - PreserveHostHeader
+        - AuthenticationFilter
 
 eureka:
   instance:

@@ -1,14 +1,13 @@
 server:
   port: 0
 
-  data:
-    mongodb:
-      uri: mongodb+srv://sachi:sachi17953@cluster0.btxveln.mongodb.net/appointment_db?appName=Cluster0
-
-  instance:
-    prefer-ip-address: true
+gcp:
+  project-id: directed-post-506508-i4
+  credentials:
+    location: classpath:gcp-key.json
 
 eureka:
   instance:
+    prefer-ip-address: true
     # using Service Name and Random UUID to create a unique Instance ID - for port is dynamic ( it means port = 0 )
     instance-id: ${spring.application.name}:${random.value}  

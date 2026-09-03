@@ -1,3 +1,14 @@
 server:
   port: 8761
 
+eureka:
+  instance:
+    hostname: 10.160.0.4
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://10.160.0.4:8761/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000

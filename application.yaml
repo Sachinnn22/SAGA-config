@@ -1,10 +1,11 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://10.160.0.3:8761/eureka,http://10.160.0.4:8761/eureka,http://10.160.0.5:8761/eureka
-
+      defaultZone: http://10.160.0.4:8761/eureka
   instance:
     prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 20
 
 management:
   endpoints:
